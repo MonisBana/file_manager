@@ -2,6 +2,11 @@ import classes from "./FileItem.module.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteFile, editFile, getFile } from "../../redux/actions/files";
+import delete_btn from "../../assets/delete.png";
+import edit_btn from "../../assets/edit.png";
+import done_btn from "../../assets/done.png";
+import folder from "../../assets/folder.png";
+import next_btn from "../../assets/right-arrow.png";
 
 class FileItem extends Component {
   constructor(props) {
@@ -16,18 +21,22 @@ class FileItem extends Component {
     let filetype = null;
     let nextBtn = null;
     if (this.props.file.folder === true) {
-      filetype = "/image/folder.png";
+      filetype = { folder };
       nextBtn = (
         <input
           type="image"
-          src="/image/right-arrow.png"
+          src={next_btn}
           alt="Next"
           className={classes.next_btn}
           onClick={() => this.props.folderClick(this.props.file.id)}
         />
       );
     } else {
-      filetype = "/image/" + this.props.file.name.split(".")[1] + ".png";
+      filetype =
+        process.env.PUBLIC_URL +
+        "/image/" +
+        this.props.file.name.split(".")[1] +
+        ".png";
       nextBtn = <div className={classes.dummy_btn}></div>;
     }
 
@@ -52,7 +61,7 @@ class FileItem extends Component {
     const editBtn = (
       <input
         type="image"
-        src="/image/edit.png"
+        src={edit_btn}
         alt="edit Btn"
         className={classes.delete_btn}
         onClick={() => this.setState({ editToggle: !this.state.editToggle })}
@@ -61,7 +70,7 @@ class FileItem extends Component {
     const doneBtn = (
       <input
         type="image"
-        src="/image/done.png"
+        src={done_btn}
         alt="done Btn"
         className={classes.delete_btn}
         onClick={submit}
@@ -74,6 +83,7 @@ class FileItem extends Component {
           alt={this.props.file.name}
           className={classes.file_type_img}
         />
+        )}
         {this.state.editToggle ? editName : fileName}
         <p className={classes.file_user}>{this.props.file.user.username}</p>
         <p className={classes.file_date}>
@@ -83,11 +93,10 @@ class FileItem extends Component {
             year: "numeric",
           })}
         </p>
-
         {this.state.editToggle ? doneBtn : editBtn}
         <input
           type="image"
-          src="/image/delete.png"
+          src={delete_btn}
           alt="delete Btn"
           className={classes.delete_btn}
           onClick={() => this.props.deleteFile(this.props.file.id)}
