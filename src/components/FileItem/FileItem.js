@@ -77,7 +77,7 @@ class FileItem extends Component {
     );
     return (
       <div className={classes.file_item}>
-        {this.props.file.folder ? (
+        {this.props.file.folder === true ? (
           <img
             src={folder}
             alt={this.props.file.name}
@@ -90,11 +90,6 @@ class FileItem extends Component {
             className={classes.file_type_img}
           />
         )}
-        <img
-          src={filetype}
-          alt={this.props.file.name}
-          className={classes.file_type_img}
-        />
 
         {this.state.editToggle ? editName : fileName}
         <p className={classes.file_user}>{this.props.file.user.username}</p>
