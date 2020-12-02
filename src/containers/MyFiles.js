@@ -32,7 +32,6 @@ class MyFiles extends Component {
   }
   componentDidMount() {
     this.props.getFiles();
-    this.makeNavList();
   }
   onFileChange = (event) => {
     this.setState({
@@ -46,7 +45,7 @@ class MyFiles extends Component {
     this.setState({ newFolderName: event.target.value });
   };
 
-  uploadWithJSON() {
+  uploadFile() {
     const formData = new FormData();
     formData.append("file", this.state.selectedFile);
     formData.append("user", this.props.auth.user);
@@ -63,34 +62,24 @@ class MyFiles extends Component {
   }
 
   uploadFolder() {
+    let parentFolder = this.state.parentFolder;
+    if (parentFolder === null) {
+      parentFolder = "";
+    }
     const formData = new FormData();
     formData.append("user", this.props.auth.user);
     formData.append("name", this.state.newFolderName);
     formData.append("folder", true);
-    formData.append("parent_folder", this.state.parentFolder);
+    formData.append("parent_folder", parentFolder);
     this.props
       .addFile(formData)
       .then(this.props.getFiles())
       .then(this.setState({ newFolder: !this.state.newFolder }));
   }
-  makeNavList = () => {
-    // const navList = [];
-    // let id, name;
-    // let parentId = this.state.parentFolder;
-    // console.log(parentId);
-    // while (parentId != null) {
-    //   id = this.props.files[parentId].id;
-    //   name = this.props.files[parentId].name;
-    //   console.log(name);
-    //   navList.append({ id, name });
-    //   parentId = this.props.files[parentId].parent_folder;
-    // }
-    // this.setState({ navList });
-  };
+
   render() {
     let fileList = null;
     let gridList = null;
-    let grid = null;
     let parentFolder = this.state.parentFolder;
     const folderClick = (parentFolderId) => {
       this.setState({ parentFolder: parentFolderId });
@@ -139,10 +128,7 @@ class MyFiles extends Component {
             placeholder={"Enter New File Name"}
           />
           <input type="file" onChange={this.onFileChange} />
-          <button
-            onClick={this.uploadWithJSON.bind(this)}
-            className={classes.btn}
-          >
+          <button onClick={this.uploadFile.bind(this)} className={classes.btn}>
             Upload
           </button>
         </div>
