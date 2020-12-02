@@ -5,6 +5,10 @@ import FileItem from "../components/FileItem/FileItem";
 import classes from "./MyFiles.module.css";
 import _ from "lodash";
 import GridItem from "../components/GridItem/GridItem";
+import list_btn from "../assets/list.png";
+import grid_btn from "../assets/grid.png";
+import new_file_btn from "../assets/new file.png";
+import new_folder_btn from "../assets/new folder.png";
 
 class MyFiles extends Component {
   constructor(props) {
@@ -190,9 +194,8 @@ class MyFiles extends Component {
           <div className={classes.toggle_wrapper}>
             <input
               type="image"
-              src="/image/list.png"
+              src={list_btn}
               alt="list Btn"
-              // style={{ backgroundImage: 'url("/image/delete.png")' }}
               className={classes.toggle_btn}
               onClick={() =>
                 this.setState({ listGridToggle: !this.state.listGridToggle })
@@ -201,9 +204,8 @@ class MyFiles extends Component {
             />
             <input
               type="image"
-              src="/image/grid.png"
+              src={grid_btn}
               alt="grid Btn"
-              // style={{ backgroundImage: 'url("/image/delete.png")' }}
               className={classes.toggle_btn}
               onClick={() =>
                 this.setState({ listGridToggle: !this.state.listGridToggle })
@@ -220,7 +222,7 @@ class MyFiles extends Component {
             >
               <div className={classes.btn_container}>
                 <img
-                  src="/image/new folder.png"
+                  src={new_folder_btn}
                   width="30"
                   height="30"
                   alt="New Folder"
@@ -235,12 +237,7 @@ class MyFiles extends Component {
               }}
             >
               <div className={classes.btn_container}>
-                <img
-                  src="/image/new file.png"
-                  width="30"
-                  height="30"
-                  alt="New File"
-                />
+                <img src={new_file_btn} width="30" height="30" alt="New File" />
               </div>
               <span>New File</span>
             </button>
