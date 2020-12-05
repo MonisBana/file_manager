@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
 import { connect } from "react-redux";
 import { login, loadUser } from "../../../redux/actions/auth";
 import classes from "./Login.module.css";
