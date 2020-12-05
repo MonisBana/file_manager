@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/file_manager/static/css/main.4eecc6c3.chunk.css",
+    "main.css": "/file_manager/static/css/main.945d39d0.chunk.css",
     "main.js": "/file_manager/static/js/main.7a3a318e.chunk.js",
     "main.js.map": "/file_manager/static/js/main.7a3a318e.chunk.js.map",
     "runtime-main.js": "/file_manager/static/js/runtime-main.96144699.js",
@@ -10,7 +10,7 @@
     "static/js/3.34458d74.chunk.js": "/file_manager/static/js/3.34458d74.chunk.js",
     "static/js/3.34458d74.chunk.js.map": "/file_manager/static/js/3.34458d74.chunk.js.map",
     "index.html": "/file_manager/index.html",
-    "static/css/main.4eecc6c3.chunk.css.map": "/file_manager/static/css/main.4eecc6c3.chunk.css.map",
+    "static/css/main.945d39d0.chunk.css.map": "/file_manager/static/css/main.945d39d0.chunk.css.map",
     "static/js/2.5d131a8f.chunk.js.LICENSE.txt": "/file_manager/static/js/2.5d131a8f.chunk.js.LICENSE.txt",
     "static/media/AuthPage.module.css": "/file_manager/static/media/bg-4.ae9a8f9c.jpg",
     "static/media/logo.3c05188e.png": "/file_manager/static/media/logo.3c05188e.png",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.96144699.js",
     "static/js/2.5d131a8f.chunk.js",
-    "static/css/main.4eecc6c3.chunk.css",
+    "static/css/main.945d39d0.chunk.css",
     "static/js/main.7a3a318e.chunk.js"
   ]
 }
