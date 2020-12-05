@@ -11,6 +11,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
+  CLEAR_FILES,
 } from "./types";
 
 // LOAD USER
@@ -86,6 +87,9 @@ export const logout = () => async (dispatch, getState) => {
   await axios.post("/logout/", null, tokenConfig(getState));
   dispatch({
     type: LOGOUT_SUCCESS,
+  });
+  dispatch({
+    type: CLEAR_FILES,
   });
 };
 

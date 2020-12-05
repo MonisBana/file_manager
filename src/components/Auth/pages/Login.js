@@ -5,13 +5,10 @@ import { connect } from "react-redux";
 import { login, loadUser } from "../../../redux/actions/auth";
 import classes from "./Login.module.css";
 
-const initialValues = {
-  username: "Monis",
-  password: "abcd",
-};
-
 function Login(props) {
   const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const enableLoading = () => {
     setLoading(true);
@@ -21,36 +18,17 @@ function Login(props) {
     setLoading(false);
   };
 
-  const getInputClasses = (fieldname) => {
-    if (formik.touched[fieldname] && formik.errors[fieldname]) {
-      return "is-invalid";
-    }
-
-    if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-      return "is-valid";
-    }
-
-    return "";
+  const onSubmit = (event) => {
+    enableLoading();
+    event.preventDefault();
+    const body = { username, password };
+    props.login(body).catch(() => {
+      disableLoading();
+    });
   };
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values, { setStatus, setSubmitting }) => {
-      enableLoading();
-      setTimeout(() => {
-        props
-          .login({ username: values.username, password: values.password })
-          .then(props.loadUser())
-          .catch(() => {
-            disableLoading();
-            setSubmitting(false);
-          });
-      }, 1000);
-    },
-  });
-
   return (
-    <div className={classes.login_form} id="kt_login_signin_form">
+    <div className={classes.login_form}>
       {/* begin::Head */}
       <div className={classes.login_head}>
         <h3>Sign In</h3>
@@ -59,20 +37,18 @@ function Login(props) {
       {/* end::Head */}
 
       {/*begin::Form*/}
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div className={classes.form_group}>
           <label>Username</label>
           <input
             placeholder="Username"
             type="text"
             name="username"
-            {...formik.getFieldProps("username")}
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
           />
-          {formik.touched.username && formik.errors.username ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.username}</div>
-            </div>
-          ) : null}
         </div>
         <div className={classes.form_group}>
           <label>Password</label>
@@ -80,23 +56,16 @@ function Login(props) {
             placeholder="Password"
             type="password"
             name="password"
-            {...formik.getFieldProps("password")}
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
-          {formik.touched.password && formik.errors.password ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.password}</div>
-            </div>
-          ) : null}
         </div>
         <div className={classes.submit_div}>
-          <button
-            id="kt_login_signin_submit"
-            type="submit"
-            disabled={formik.isSubmitting}
-            className={`btn btn-primary font-weight-bold px-9 py-4 my-3`}
-          >
+          <button type="submit">
             <span>Sign In</span>
-            {loading && <span className="ml-3 spinner spinner-white"></span>}
+            {loading && <span className={classes.loader}></span>}
           </button>
         </div>
       </form>

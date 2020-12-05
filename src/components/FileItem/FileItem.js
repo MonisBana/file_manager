@@ -44,9 +44,9 @@ class FileItem extends Component {
     );
 
     const submit = () => {
-      const newData = this.props.file;
+      const newData = {};
       newData["name"] = this.state.filename;
-      this.props.editFile(newData["id"], newData);
+      this.props.editFile(this.props.file.id, newData);
       this.setState({ editToggle: !this.state.editToggle });
     };
     const editName = (

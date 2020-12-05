@@ -5,6 +5,7 @@ import {
   ADD_FILE,
   DELETE_FILE,
   EDIT_FILE,
+  CLEAR_FILES,
 } from "../actions/types";
 
 const fileReducer = (state = {}, action) => {
@@ -23,6 +24,8 @@ const fileReducer = (state = {}, action) => {
       };
     case DELETE_FILE:
       return _.omit(state, action.payload);
+    case CLEAR_FILES:
+      return {};
     default:
       return state;
   }

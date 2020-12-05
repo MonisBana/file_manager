@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getFiles, addFile } from "../redux/actions/files";
+import { loadUser } from "../redux/actions/auth";
 import FileItem from "../components/FileItem/FileItem";
 import classes from "./MyFiles.module.css";
 import _ from "lodash";
@@ -31,6 +32,7 @@ class MyFiles extends Component {
     };
   }
   componentDidMount() {
+    this.props.loadUser();
     this.props.getFiles();
   }
   onFileChange = (event) => {
@@ -110,10 +112,10 @@ class MyFiles extends Component {
       });
       console.log(Files);
       gridList = Files.map((file, index) => {
-        return <GridItem file={file} key={index} folderClick={folderClick} />;
+        return <GridItem file={file} key={file.id} folderClick={folderClick} />;
       });
       fileList = Files.map((file, index) => {
-        return <FileItem file={file} key={index} folderClick={folderClick} />;
+        return <FileItem file={file} key={file.id} folderClick={folderClick} />;
       });
     }
 
@@ -263,4 +265,6 @@ const mapStateToProps = (state) => ({
   files: state.files,
   auth: state.auth,
 });
-export default connect(mapStateToProps, { getFiles, addFile })(MyFiles);
+export default connect(mapStateToProps, { getFiles, addFile, loadUser })(
+  MyFiles
+);
