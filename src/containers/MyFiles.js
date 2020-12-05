@@ -10,6 +10,7 @@ import list_btn from "../assets/list.png";
 import grid_btn from "../assets/grid.png";
 import new_file_btn from "../assets/new file.png";
 import new_folder_btn from "../assets/new folder.png";
+import folder from "../assets/folder.png";
 
 class MyFiles extends Component {
   constructor(props) {
@@ -159,6 +160,11 @@ class MyFiles extends Component {
     return (
       <div>
         <div className={classes.subHeader}>
+          <img
+            src={folder}
+            alt="Current directory"
+            style={{ width: "2.25rem", padding: "0.2rem" }}
+          />
           <h2
             style={{
               fontWeight: "500 !important",
